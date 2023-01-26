@@ -3,12 +3,12 @@
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-table.listado-personas {
+table.listado-proyectos {
     width: 100%;
     border: 1px solid rgba(0, 0, 100, 0.8);
 }
 
-table.listado-personas thead th {
+table.listado-proyectos thead th {
     margin: 3px;
     height: 2.5em;
     background-color: rgba(0, 0, 0, 0.4);
@@ -16,12 +16,12 @@ table.listado-personas thead th {
 
 }
 
-table.listado-personas tbody td {
+table.listado-proyectos tbody td {
     padding: 0.5em;
     text-align: center;
 }
 
-table.listado-personas tbody tr {
+table.listado-proyectos tbody tr {
     margin: 3px;
     height: 2em;
     background-color: rgba(0, 0, 100, 0.1)

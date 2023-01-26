@@ -31,9 +31,9 @@ function proyectosCabeceraDIV() {
 function proyectoDIV( p ) {
     return `<div>
     <p><b>ID</b>: ${p.ref['@ref'].id}</p>
+    <p><b>Alias</b>: ${p.data.alias}</p>
     <p><b>Nombre</b>: ${p.data.nombre}</p>
-    <p><b>Apelidos</b>: ${p.data.apellidos}</p>
-    <p><b>E-mail</b>: ${p.data.email}</p>
+    <p><b>Presupuesto</b>: ${p.data.presupuesto}</p>
     <p><b>En plantilla desde</b>: ${p.data.anio_entrada}</p>
     </div>
     `;
@@ -46,17 +46,23 @@ function proyectosPieDIV() {
 function proyectosCabeceraTABLE() {
     return `<table class="listado-proyectos">
         <thead>
-        <th>Nombre</th><th>Apellidos</th><th>eMail</th><th>Año contratación</th>
+        <th>Alias</th><th>Nombre</th><th>Presupuesto</th><th>Desde</th><th>Hasta</th>
         </thead>
         <tbody>
     `;
 }
 function proyectoTR( p ) {
+    const d=p.data
+    const ini=d.inicio;
+    const fin=d.final;
+    const presupuesto=(new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(d.presupuesto));
+
     return `<tr title="${p.ref['@ref'].id}">
-    <td>${p.data.nombre}</td>
-    <td>${p.data.apellidos}</td>
-    <td>${p.data.email}</td>
-    <td>${p.data.anio_entrada}</td>
+    <td>${d.alias}</td>
+    <td><em>${d.nombre}</em></td>
+    <td>${presupuesto}</td>
+    <td>${ini.dia}/${ini.mes}/${ini.año}</td>
+    <td>${fin.dia}/${fin.mes}/${fin.año}</td>
     </tr>
     `;
 }
