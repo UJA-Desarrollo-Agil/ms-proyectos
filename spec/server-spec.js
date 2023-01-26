@@ -36,7 +36,7 @@ describe('Servidor Proyectos:', () => {
   })
 
   describe('Acceso a BBDD:', () => {
-    it('Devuelve Ana al consultar mediante test_db', (done) => {
+    it('Devuelve \"UJA Contabilidad\" al consultar mediante test_db', (done) => {
       supertest(app)
         .get('/test_db')
         .expect(200)
@@ -44,7 +44,7 @@ describe('Servidor Proyectos:', () => {
         .expect(function (res) {
           //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
           assert(res.body.data[0].data.hasOwnProperty('nombre'));
-          assert(res.body.data[0].data.nombre === "Ana");
+          assert(res.body.data[0].data.nombre === "UJA Contabilidad");
 
         })
         .end((error) => { error ? done.fail(error) : done(); }
@@ -65,14 +65,14 @@ describe('Servidor Proyectos:', () => {
         });
     });
 
-    it('Devuelve un vector de tamaño 3 al consultar mediante getProyectosAll', (done) => {
+    it('Devuelve un vector de tamaño 2 al consultar mediante getProyectosAll', (done) => {
       supertest(app)
         .get('/getProyectosAll')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function (res) {
-          // console.log( res.body ); // Para comprobar qué contiene exactamente res.body
-          assert(res.body.length === 3);
+          //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
+          assert(res.body.data.length === 2);
         })
         .end((error) => { error ? done.fail(error) : done(); }
         );
