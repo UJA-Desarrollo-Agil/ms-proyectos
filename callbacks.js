@@ -8,7 +8,7 @@ const client = new faunadb.Client({
     secret: 'fnAE6dR1GVAA1qiaRxaSZtbA7yGo6OpT2cB5NQnb',
 });
 
-const SEND_FILE_OPTIONS = { root: (__dirname + '/static-files') }
+const SEND_FILE_OPTIONS = { root: (__dirname + '/front-end') }
 
 // Permitir CORS
 function CORS(res) {

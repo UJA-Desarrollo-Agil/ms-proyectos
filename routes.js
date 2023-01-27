@@ -6,7 +6,7 @@ const { callbacks } = require("./callbacks");
 
 
 /* Directotio para rutas estáticas */
-router.use('/', express.static(__dirname + '/static-files'))
+router.use('/', express.static(__dirname + '/front-end'))
 
 
 
