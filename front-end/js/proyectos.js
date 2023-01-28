@@ -7,7 +7,7 @@ const PORT = "8002"
 const DIV_LISTADO = "listado"
 
 async function recuperaProyectos(callBackFn) {
-    const url = SERVER + ":" + PORT + "/getProyectosAll"
+    const url = SERVER + ":" + PORT + "/getProyectos"
     const response = await fetch(url);
     const vectorProyectos = await response.json()
     callBackFn(vectorProyectos.data)
