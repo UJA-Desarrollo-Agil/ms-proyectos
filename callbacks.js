@@ -34,7 +34,24 @@ const CB_MODEL_SELECTS = {
             res.status(500).json({ error: error.description })
         }
     },
-    getProyectosAll: async (req, res) => {
+    getProyectos: async (req, res) => {
+        try {
+            let proyectos = await client.query(
+                q.Map(
+                    q.Paginate(q.Documents(q.Collection("Proyectos"))),
+                    q.Lambda("X", q.Get(q.Var("X")))
+                )
+            )
+            // console.log( proyectos ) // Para comprobar qué se ha devuelto en proyectos
+            //proyectos = proyectos.data.map(e => e.data)  // Elimina la info innecesaria
+            CORS(res)
+                .status(200)
+                .json(proyectos)
+        } catch (error) {
+            res.status(500).json({ error: error.description })
+        }
+    },
+    getProyectosConPersonas: async (req, res) => {
         try {
             let proyectos = await client.query(
                 q.Map(

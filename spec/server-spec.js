@@ -65,9 +65,9 @@ describe('Servidor Proyectos:', () => {
         });
     });
 
-    it('Devuelve un vector de tamaño 2 al consultar mediante getProyectosAll', (done) => {
+    it('Devuelve un vector de tamaño 2 al consultar mediante getProyectos', (done) => {
       supertest(app)
-        .get('/getProyectosAll')
+        .get('/getProyectos')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function (res) {

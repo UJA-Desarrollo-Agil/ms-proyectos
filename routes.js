@@ -40,9 +40,9 @@ router.get("/test_db", async (req, res) => {
 });
 
 // Devuelve todos los proyectos que hay en la BBDD
-router.get("/getProyectosAll", async (req, res) => {
+router.get("/getProyectos", async (req, res) => {
     try {
-        await callbacks.getProyectosAll(req, res)
+        await callbacks.getProyectos(req, res)
     } catch (error) {
         console.log(error);
     }
