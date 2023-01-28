@@ -8,8 +8,9 @@ table.listado-proyectos {
     border: 1px solid rgba(0, 0, 100, 0.8);
 }
 
-table.listado-proyectos thead th {
-    margin: 3px;
+table.listado-proyectos thead th,
+table.listado-proyectos tbody th {
+        margin: 3px;
     height: 2.5em;
     background-color: rgba(0, 0, 0, 0.4);
     text-transform: uppercase;

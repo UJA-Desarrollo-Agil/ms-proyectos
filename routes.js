@@ -68,5 +68,15 @@ router.get("/listar", async (req, res) => {
 });
 
 
+// Devuelve todos los proyectos que hay en la BBDD
+router.get("/listarConPersonas", async (req, res) => {
+    try {
+        await callbacks.listarConPersonas(req, res)
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
 // Exporto el módulo para poder usarlo en server
 module.exports = router;

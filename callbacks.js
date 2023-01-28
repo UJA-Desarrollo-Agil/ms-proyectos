@@ -132,6 +132,20 @@ const CB_OTHERS = {
         }
     },
 
+    listarConPersonas: async (req, res) => {
+        try {
+            res.sendFile("/listarConPersonas.html",
+                SEND_FILE_OPTIONS,
+                function (err) {
+                    if (err) {
+                        console.error(err);
+                    }
+                })
+        } catch (error) {
+            res.status(500).json({ error: error.description })
+        }
+    },
+
 }
 
 // Une todos los callbacks en un solo objeto.
