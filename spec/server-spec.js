@@ -71,8 +71,23 @@ describe('Servidor Proyectos:', () => {
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function (res) {
-          //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
+          //console.log( "getProyectos BODY: ", res.body ); // Para comprobar qué contiene exactamente res.body
           assert(res.body.data.length === 2);
+        })
+        .end((error) => { error ? done.fail(error) : done(); }
+        );
+    });
+
+    it('Devuelve 2 personas en el segundo proyecto al consultar getProyectosConPersonas', (done) => {
+      supertest(app)
+        .get('/getProyectosConPersonas')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .expect(function (res) {
+          //console.log( "getProyectosConPersonas BODY: ", res.body.data ); // Para comprobar qué contiene exactamente res.body
+          //console.log( "getProyectosConPersonas BODY data.length: ", res.body.data.length ); // Para comprobar qué contiene exactamente res.body
+          assert(res.body.data[1].data.hasOwnProperty('datos_personas'));
+          assert(res.body.data[1].data.datos_personas.length === 2);
         })
         .end((error) => { error ? done.fail(error) : done(); }
         );

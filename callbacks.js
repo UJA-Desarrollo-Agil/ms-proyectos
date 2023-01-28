@@ -4,7 +4,11 @@
 const faunadb = require('faunadb'),
     q = faunadb.query;
 
-const client = new faunadb.Client({
+const client_proyectos = new faunadb.Client({
+    secret: 'fnAE6dR1GVAA1qiaRxaSZtbA7yGo6OpT2cB5NQnb',
+});
+
+const client_personas = new faunadb.Client({
     secret: 'fnAE6dR1GVAA1qiaRxaSZtbA7yGo6OpT2cB5NQnb',
 });
 
@@ -23,7 +27,7 @@ function CORS(res) {
 const CB_MODEL_SELECTS = {
     test_db: async (req, res) => {
         try {
-            let proyectos = await client.query(
+            let proyectos = await client_proyectos.query(
                 q.Map(
                     q.Paginate(q.Documents(q.Collection("Proyectos"))),
                     q.Lambda("X", q.Get(q.Var("X")))
@@ -36,14 +40,13 @@ const CB_MODEL_SELECTS = {
     },
     getProyectos: async (req, res) => {
         try {
-            let proyectos = await client.query(
+            let proyectos = await client_proyectos.query(
                 q.Map(
                     q.Paginate(q.Documents(q.Collection("Proyectos"))),
                     q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
             // console.log( proyectos ) // Para comprobar qué se ha devuelto en proyectos
-            //proyectos = proyectos.data.map(e => e.data)  // Elimina la info innecesaria
             CORS(res)
                 .status(200)
                 .json(proyectos)
@@ -53,14 +56,41 @@ const CB_MODEL_SELECTS = {
     },
     getProyectosConPersonas: async (req, res) => {
         try {
-            let proyectos = await client.query(
+            let proyectos = await client_proyectos.query(
                 q.Map(
                     q.Paginate(q.Documents(q.Collection("Proyectos"))),
                     q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
-            // console.log( proyectos ) // Para comprobar qué se ha devuelto en proyectos
-            //proyectos = proyectos.data.map(e => e.data)  // Elimina la info innecesaria
+            let personas = await client_personas.query(
+                q.Map(
+                    q.Paginate(q.Documents(q.Collection("Personas"))),
+                    q.Lambda("X", q.Get(q.Var("X")))
+                )
+            )
+            
+            // Comprobaciones para ver qué almacenan los datos descargados
+            // y así poder usarlos en las expresiones
+            /*
+            console.log( "Proyectos: \n", proyectos ) // Para comprobar qué se ha devuelto en proyectos
+            console.log( "Personas: \n", personas ) // Para comprobar qué se ha devuelto en personas
+            // para comprobar las personas dentro de cada proyecto
+            proyectos.data.forEach(e => {
+                console.log( e.data )
+            });
+            // usando documento.ref.value.id puedo saber el id de cada documento
+            personas.data.forEach(e => {
+                console.log( e.ref.value.id, e.data )
+            });
+            */
+            // Incluyo los datos de cada persona que hay en el proyecto
+            proyectos.data.forEach( pr=>{
+                // Creo un nuevo campo llamado datos_personas en cada proyecto
+                pr.data.datos_personas=personas.data.filter( pe => 
+                    pr.data.personas.join().includes( pe.ref.value.id)
+                )
+            });
+
             CORS(res)
                 .status(200)
                 .json(proyectos)
@@ -108,3 +138,6 @@ const CB_OTHERS = {
 // OJO: No debe haber callbacks con el mismo nombre en los distintos objetos, porque si no
 // el último que haya sobreescribe a todos los anteriores.
 exports.callbacks = { ...CB_MODEL_SELECTS, ...CB_OTHERS }
+
+
+//CB_MODEL_SELECTS.getProyectosConPersonas() // Para depuración
