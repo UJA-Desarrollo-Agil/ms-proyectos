@@ -38,7 +38,7 @@ const CB_MODEL_SELECTS = {
             res.status(500).json({ error: error.description })
         }
     },
-    getProyectos: async (req, res) => {
+    getTodos: async (req, res) => {
         try {
             let proyectos = await client_proyectos.query(
                 q.Map(
@@ -54,7 +54,7 @@ const CB_MODEL_SELECTS = {
             res.status(500).json({ error: error.description })
         }
     },
-    getProyectosConPersonas: async (req, res) => {
+    getTodosConPersonas: async (req, res) => {
         try {
             let proyectos = await client_proyectos.query(
                 q.Map(
@@ -111,36 +111,9 @@ const CB_OTHERS = {
             res.status(500).json({ error: error.description })
         }
     },
-    about: async (req, res) => {
+    acercaDe: async (req, res) => {
         try {
-            res.status(200).send("Microservicio Proyectos: about page");
-        } catch (error) {
-            res.status(500).json({ error: error.description })
-        }
-    },
-    listar: async (req, res) => {
-        try {
-            res.sendFile("/listar.html",
-                SEND_FILE_OPTIONS,
-                function (err) {
-                    if (err) {
-                        console.error(err);
-                    }
-                })
-        } catch (error) {
-            res.status(500).json({ error: error.description })
-        }
-    },
-
-    listarConPersonas: async (req, res) => {
-        try {
-            res.sendFile("/listarConPersonas.html",
-                SEND_FILE_OPTIONS,
-                function (err) {
-                    if (err) {
-                        console.error(err);
-                    }
-                })
+            res.status(200).send("Microservicio Proyectos: página Acerca De");
         } catch (error) {
             res.status(500).json({ error: error.description })
         }

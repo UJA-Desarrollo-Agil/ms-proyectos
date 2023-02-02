@@ -22,14 +22,14 @@ describe('Servidor Proyectos:', () => {
         })
         .end((error) => { error ? done.fail(error) : done() })
     });
-    it('Devuelve Proyectos About PAGE', (done) => {
+    it('Devuelve Proyectos Acerca De', (done) => {
       supertest(app)
-        .get('/about')
+        .get('/acercade')
         .expect(200)
         .expect('Content-Type', /html/)
         .expect(function (res) {
           // console.log( res.text ); // Para comprobar qué contiene exactamente res.text
-          assert(res.text === "Microservicio Proyectos: about page")
+          assert(res.text === "Microservicio Proyectos: página Acerca De")
         })
         .end((error) => { error ? done.fail(error) : done() })
     });
@@ -51,23 +51,11 @@ describe('Servidor Proyectos:', () => {
         );
     });
 
-    it('Devuelve la página de listado de proyectos al consultar /listar', (done) => {
-      supertest(app)
-        .get('/listar')
-        .expect(200)
-        .expect('Content-Type', /html/)
-        .expect(function (res) {
-          // console.log( res.text ); // Para comprobar qué contiene exactamente res.text
-          assert(res.text.includes("Listado de proyectos"))
-        })
-        .end((error) => {
-          error ? done.fail(error) : done()
-        });
-    });
 
-    it('Devuelve un vector de tamaño 2 al consultar mediante getProyectos', (done) => {
+
+    it('Devuelve un vector de tamaño 2 al consultar mediante getTodos', (done) => {
       supertest(app)
-        .get('/getProyectos')
+        .get('/getTodos')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function (res) {
@@ -78,9 +66,9 @@ describe('Servidor Proyectos:', () => {
         );
     });
 
-    it('Devuelve 2 personas en el segundo proyecto al consultar getProyectosConPersonas', (done) => {
+    it('Devuelve 2 personas en el segundo proyecto al consultar getTodosConPersonas', (done) => {
       supertest(app)
-        .get('/getProyectosConPersonas')
+        .get('/getTodosConPersonas')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function (res) {

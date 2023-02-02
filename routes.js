@@ -20,9 +20,9 @@ router.get("/", async (req, res) => {
 });
 
 // About page route.
-router.get("/about", async (req, res) => {
+router.get("/acercade", async (req, res) => {
     try {
-        await callbacks.about(req, res)
+        await callbacks.acercaDe(req, res)
     } catch (error) {
         console.log(error);
     }
@@ -40,9 +40,9 @@ router.get("/test_db", async (req, res) => {
 });
 
 // Devuelve todos los proyectos que hay en la BBDD
-router.get("/getProyectos", async (req, res) => {
+router.get("/getTodos", async (req, res) => {
     try {
-        await callbacks.getProyectos(req, res)
+        await callbacks.getTodos(req, res)
     } catch (error) {
         console.log(error);
     }
@@ -50,9 +50,9 @@ router.get("/getProyectos", async (req, res) => {
 
 
 // Devuelve todos los proyectos que hay en la BBDD añadiendo las personas que participan
-router.get("/getProyectosConPersonas", async (req, res) => {
+router.get("/getTodosConPersonas", async (req, res) => {
     try {
-        await callbacks.getProyectosConPersonas(req, res)
+        await callbacks.getTodosConPersonas(req, res)
     } catch (error) {
         console.log(error);
     }
