@@ -1,6 +1,7 @@
 // callbacks.js - callbacks for microservicio-1.
 // CALLBACKS DEL MODELO
-// CALLBACKS DEL MODELO
+const fetch = require("node-fetch"); 
+
 const faunadb = require('faunadb'),
     q = faunadb.query;
 
@@ -59,32 +60,33 @@ const CB_MODEL_SELECTS = {
                 )
             )
             let url=URL_MS_PERSONAS+"/getTodas"
-            let response_personas = await fetch("https://www.ujaen.es");
-            //let personas = await response_personas.json()
-            //console.log( response_personas )
+            let response_personas = await fetch(url)
+            let personas = await response_personas.json()
 
             // Comprobaciones para ver qué almacenan los datos descargados
             // y así poder usarlos en las expresiones
             
-            console.log( "Proyectos: \n", proyectos ) // Para comprobar qué se ha devuelto en proyectos
+            /*
+            //console.log( "Proyectos: \n", proyectos ) // Para comprobar qué se ha devuelto en proyectos
             //console.log( "Personas: \n", personas ) // Para comprobar qué se ha devuelto en personas
             // para comprobar las personas dentro de cada proyecto
-            /*proyectos.data.forEach(e => {
+            
+            proyectos.data.forEach(e => {
                 console.log( e.data )
             });
-            // usando documento.ref.value.id puedo saber el id de cada documento
+            // usando e.ref["@ref"].id puedo saber el id de cada objeto descargado con fetch
             personas.data.forEach(e => {
-                console.log( e.ref.value.id, e.data )
+                console.log( e.ref["@ref"].id, e.data)
             });
-            
+            */
             // Incluyo los datos de cada persona que hay en el proyecto
             proyectos.data.forEach( pr=>{
                 // Creo un nuevo campo llamado datos_personas en cada proyecto
                 pr.data.datos_personas=personas.data.filter( pe => 
-                    pr.data.personas.join().includes( pe.ref.value.id)
+                    pr.data.personas.join().includes( pe.ref["@ref"].id)
                 )
             });
-            */
+            
             CORS(res)
                 .status(200)
                 .json(proyectos)
@@ -121,4 +123,4 @@ const CB_OTHERS = {
 exports.callbacks = { ...CB_MODEL_SELECTS, ...CB_OTHERS }
 
 
-//CB_MODEL_SELECTS.getProyectosConPersonas() // Para depuración
+//CB_MODEL_SELECTS.getTodosConPersonas() // Para depuración
