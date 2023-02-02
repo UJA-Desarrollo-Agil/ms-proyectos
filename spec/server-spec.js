@@ -10,15 +10,17 @@ const assert = require('assert')
 const app = require('../server');
 
 describe('Servidor Proyectos:', () => {
-  describe('Páginas estáticas', () => {
+  describe('Rutas / y /acercade', () => {
     it('Devuelve Proyectos Home Page', (done) => {
       supertest(app)
         .get('/')
         .expect(200)
-        .expect('Content-Type', /html/)
+        .expect('Content-Type', /json/)
         .expect(function (res) {
-          // console.log( res.text ); // Para comprobar qué contiene exactamente res.text
-          assert(res.text === "Microservicio Proyectos: home page")
+          //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
+          assert(res.body.hasOwnProperty('mensaje'));
+          assert(res.body.mensaje === "Microservicio Proyectos: home");
+
         })
         .end((error) => { error ? done.fail(error) : done() })
     });
@@ -26,10 +28,12 @@ describe('Servidor Proyectos:', () => {
       supertest(app)
         .get('/acercade')
         .expect(200)
-        .expect('Content-Type', /html/)
+        .expect('Content-Type', /json/)
         .expect(function (res) {
-          // console.log( res.text ); // Para comprobar qué contiene exactamente res.text
-          assert(res.text === "Microservicio Proyectos: página Acerca De")
+          //console.log( "BODY ACERCA DE ", res.body ); // Para comprobar qué contiene exactamente res.body
+          assert(res.body.hasOwnProperty('mensaje'));
+          assert(res.body.mensaje === "Microservicio Proyectos: acerca de");
+
         })
         .end((error) => { error ? done.fail(error) : done() })
     });

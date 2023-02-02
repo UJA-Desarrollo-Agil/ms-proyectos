@@ -12,7 +12,6 @@ const client_personas = new faunadb.Client({
     secret: 'fnAE6dR1GVAA1qiaRxaSZtbA7yGo6OpT2cB5NQnb',
 });
 
-const SEND_FILE_OPTIONS = { root: (__dirname + '/front-end') }
 
 // Permitir CORS
 function CORS(res) {
@@ -106,14 +105,14 @@ const CB_MODEL_SELECTS = {
 const CB_OTHERS = {
     home: async (req, res) => {
         try {
-            res.status(200).send("Microservicio Proyectos: home page");
+            res.status(200).json({mensaje: "Microservicio Proyectos: home"});
         } catch (error) {
             res.status(500).json({ error: error.description })
         }
     },
     acercaDe: async (req, res) => {
         try {
-            res.status(200).send("Microservicio Proyectos: página Acerca De");
+            res.status(200).json({mensaje: "Microservicio Proyectos: acerca de"});
         } catch (error) {
             res.status(500).json({ error: error.description })
         }
