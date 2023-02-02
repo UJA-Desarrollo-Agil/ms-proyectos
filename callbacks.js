@@ -8,10 +8,7 @@ const client_proyectos = new faunadb.Client({
     secret: 'fnAE6dR1GVAA1qiaRxaSZtbA7yGo6OpT2cB5NQnb',
 });
 
-const client_personas = new faunadb.Client({
-    secret: 'fnAE6dR1GVAA1qiaRxaSZtbA7yGo6OpT2cB5NQnb',
-});
-
+const URL_MS_PERSONAS = "http://localhost:8002";
 
 // Permitir CORS
 function CORS(res) {
@@ -61,27 +58,25 @@ const CB_MODEL_SELECTS = {
                     q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
-            let personas = await client_personas.query(
-                q.Map(
-                    q.Paginate(q.Documents(q.Collection("Personas"))),
-                    q.Lambda("X", q.Get(q.Var("X")))
-                )
-            )
-            
+            let url=URL_MS_PERSONAS+"/getTodas"
+            let response_personas = await fetch("https://www.ujaen.es");
+            //let personas = await response_personas.json()
+            //console.log( response_personas )
+
             // Comprobaciones para ver qué almacenan los datos descargados
             // y así poder usarlos en las expresiones
-            /*
+            
             console.log( "Proyectos: \n", proyectos ) // Para comprobar qué se ha devuelto en proyectos
-            console.log( "Personas: \n", personas ) // Para comprobar qué se ha devuelto en personas
+            //console.log( "Personas: \n", personas ) // Para comprobar qué se ha devuelto en personas
             // para comprobar las personas dentro de cada proyecto
-            proyectos.data.forEach(e => {
+            /*proyectos.data.forEach(e => {
                 console.log( e.data )
             });
             // usando documento.ref.value.id puedo saber el id de cada documento
             personas.data.forEach(e => {
                 console.log( e.ref.value.id, e.data )
             });
-            */
+            
             // Incluyo los datos de cada persona que hay en el proyecto
             proyectos.data.forEach( pr=>{
                 // Creo un nuevo campo llamado datos_personas en cada proyecto
@@ -89,7 +84,7 @@ const CB_MODEL_SELECTS = {
                     pr.data.personas.join().includes( pe.ref.value.id)
                 )
             });
-
+            */
             CORS(res)
                 .status(200)
                 .json(proyectos)
