@@ -1,16 +1,17 @@
-// routes.js - routes for microservicio-1.
-
+/**
+ * @file routes.js - callbacks para ms proyectos
+ * @description Define las rutas ante las que va a responder este ms
+ * @author Víctor M. Rivas <vrivas@ujaen.es>
+ * @date 03-feb-2023
+ */
 const express = require("express");
 const router = express.Router();
 const { callbacks } = require("./callbacks");
 
 
-/* Directotio para rutas estáticas */
-router.use('/', express.static(__dirname + '/front-end'))
-
-
-
-// Home page route.
+/**
+ * Ruta raíz: /
+ */
 router.get("/", async (req, res) => {
     try {
         await callbacks.home(req, res)
@@ -19,7 +20,9 @@ router.get("/", async (req, res) => {
     }
 });
 
-// About page route.
+/**
+ * Ruta Acerca De (es decir, About...)
+ */
 router.get("/acercade", async (req, res) => {
     try {
         await callbacks.acercaDe(req, res)
@@ -30,7 +33,9 @@ router.get("/acercade", async (req, res) => {
 
 
 
-// Test de conexión a la base de datos
+/**
+ * Test de conexión a la BBDD
+ */
 router.get("/test_db", async (req, res) => {
     try {
         await callbacks.test_db(req, res)
@@ -39,7 +44,9 @@ router.get("/test_db", async (req, res) => {
     }
 });
 
-// Devuelve todos los proyectos que hay en la BBDD
+/**
+ * Devuelve todas las personas que hay en la BBDD
+ */
 router.get("/getTodos", async (req, res) => {
     try {
         await callbacks.getTodos(req, res)
