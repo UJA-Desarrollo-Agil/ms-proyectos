@@ -81,7 +81,7 @@ describe('Servidor Proyectos:', () => {
         );
     });
 
-    it('Devuelve 2 personas en el segundo proyecto al consultar getTodosConPersonas', (done) => {
+    it('Devuelve 2 personas en el segundo proyecto al consultar getTodosConPersonas.\n El MS Peronas debe estar levantado.', (done) => {
       supertest(app)
         .get('/getTodosConPersonas')
         .expect(200)
