@@ -1,6 +1,6 @@
 /**
  * @file server-spec.js
- * @description Fichero con la especificación de las pruebas TDD para server.js
+ * @description Fichero con la especificación de las pruebas TDD para server.js de MS Proyectos
  *              Este fichero DEBE llamarse server-spec.js
  *              Este fichero DEBE ubicarse en el subdirectorio spec/
  * @author Víctor M. Rivas Santos <vrivas@ujaen.es>

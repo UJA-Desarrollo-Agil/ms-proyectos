@@ -1,6 +1,6 @@
 /**
- * @file routes.js - callbacks para ms proyectos
- * @description Define las rutas ante las que va a responder este ms
+ * @file routes.js
+ * @description Define las rutas ante las que va a responder el MS Proyectos
  * @author Víctor M. Rivas <vrivas@ujaen.es>
  * @date 03-feb-2023
  */

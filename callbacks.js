@@ -1,7 +1,8 @@
 /**
- * @file callbacks.js - callbacks para ms proyextos
- * @description Los callbacks son las funciones que se llaman cada vez que se recibe una petición a través de la API.
- *               Las peticiones se reciben en las rutas definidas en routes.js, pero se procesan aquí.
+ * @file callbacks.js 
+ * @description  Callbacks para MS Proyectos.
+ * Los callbacks son las funciones que se llaman cada vez que se recibe una petición a través de la API.
+ * Las peticiones se reciben en las rutas definidas en routes.js, pero se procesan aquí.
  * @author Víctor M. Rivas <vrivas@ujaen.es>
  * @date 03-feb-2023
  */
