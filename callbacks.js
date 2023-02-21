@@ -56,9 +56,9 @@ const CB_MODEL_SELECTS = {
                     q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
-            res.status(200).json(proyectos)
+            CORS(res).status(200).json(proyectos)
         } catch (error) {
-            res.status(500).json({ error: error.description })
+            CORS(res).status(500).json({ error: error.description })
         }
     },
     /**
@@ -79,7 +79,7 @@ const CB_MODEL_SELECTS = {
                 .status(200)
                 .json(proyectos)
         } catch (error) {
-            res.status(500).json({ error: error.description })
+            CORS(res).status(500).json({ error: error.description })
         }
     },
     /**
@@ -127,7 +127,7 @@ const CB_MODEL_SELECTS = {
                 .status(200)
                 .json(proyectos)
         } catch (error) {
-            res.status(500).json({ error: error.description+"\n ¡¡COMPRUEBE QUE EL MS PERSONAS FUNCIONA CORRECTAMENTE" })
+            CORS(res).status(500).json({ error: error.description+"\n ¡¡COMPRUEBE QUE EL MS PERSONAS FUNCIONA CORRECTAMENTE" })
         }
     },
 }
